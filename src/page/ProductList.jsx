@@ -4,6 +4,8 @@ import ProductCard from '../components/ProductCard';
 import styles from './ProductList.module.css';
 import ProductForm from "../components/ProductForm"; 
 
+const [editingProduct, setEditingProduct] = useState(null);
+
 const handleAddProduct = (product) => {
   setProductsState((prev) => {
     const maxId = prev.reduce((acc, item) => Math.max(acc, item.id), 0);
@@ -15,6 +17,24 @@ const handleAddProduct = (product) => {
 
 const handleDeleteProduct = (id) => {
   setProductsState((prev) => prev.filter((product) => product.id !== id));
+};
+
+const handleEditStart = (product) => {
+  setEditingProduct(product);
+};
+
+const handleEditCancel = () => {
+  setEditingProduct(null);
+};
+
+const handleEditSubmit = (updatedProduct) => {
+  setProductsState((prev) =>
+    prev.map((product) =>
+      product.id === updatedProduct.id ? updatedProduct : product,
+    ),
+  );
+
+  setEditingProduct(null);
 };
 
 function ProductList() {
@@ -29,7 +49,12 @@ function ProductList() {
                 </p>
             </header>
 
-            <ProductForm onSubmit={handleAddProduct} />
+            <ProductForm
+                initialValues={editingProduct}
+                isEditing={Boolean(editingProduct)}
+                onCancel={handleEditCancel}
+                onSubmit={editingProduct ? handleEditSubmit : handleAddProduct}
+            />
 
             <div className={styles.grid}>
                 {productsState.map((product) => (
@@ -41,7 +66,9 @@ function ProductList() {
                         stock={product.stock}
                         image={product.image}
                         description={product.description}
+                        onEdit={() => handleEditStart(product)}
                         onDelete={() => handleDeleteProduct(product.id)}
+                        
                     />
                 ))}
             </div>
