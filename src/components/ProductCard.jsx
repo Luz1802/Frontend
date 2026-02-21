@@ -1,27 +1,9 @@
 import { useState } from 'react';
 import styles from '../styles/ProductCard.module.css';
- 
-function ProductCard({name, price, stock, description, image, category, onEdit, onDelete}) {
-    const{likes,setLikes} = useState(0);
-    const{isLiked,setIsLiked} = useState(false);
-
-{
-  onEdit || onDelete ? (
-    <div className={styles.cardActions}>
-      {onEdit ? (
-        <button type="button" className={styles.btnEdit} onClick={onEdit}>
-          Editar
-        </button>
-      ) : null}
-
-      {onDelete ? (
-        <button type="button" className={styles.btnDelete} onClick={onDelete}>
-          Eliminar
-        </button>
-      ) : null}
-    </div>
-  ) : null;
-}
+   
+    function ProductCard({name, price, stock, description, image, category, onEdit, onDelete}) {
+    const {likes, setLikes} = useState(0);
+    const {isLiked, setIsLiked} = useState(false);
  
     const handleLike = () => {
         if (isLiked){
@@ -32,27 +14,42 @@ function ProductCard({name, price, stock, description, image, category, onEdit, 
             setIsLiked(true);
         }
     };
-
+ 
     return (
-    <article className={styles.productCard}>
-        <img src={image} alt={name} className={styles.productImage} />
-        <div className={styles.productInfo}>
-            <span className={styles.productCategory}>{category}</span>
-            <h3 className={styles.productName}>{name}</h3>
-            <p className={styles.productDescription}>{description}</p>
-            <div className={styles.productFooter}>
-            <span className={styles.productPrice}>${price.toFixed(2)}</span>
-            <p className={styles.productStock}>Stock: {stock}</p>
-            <button
-                    className = {`${styles.btnLike} ${isLiked ? styles.liked : ''}`}
-                    onClick = { hanleLike }
+        <article className={styles.productCard}>
+            <img src={image} alt={name} className={styles.productImage} />
+            <div className={styles.productInfo}>
+                <span className={styles.productCategory}>{category}</span>
+                <h3 className={styles.productName}>{name}</h3>
+                <p className={styles.productDescription}>{description}</p>
+                <p className={styles.productStock}>Stock: {stock}</p>
+                <div className={styles.productFooter}>
+                    <span className={styles.productPrice}>${price.toFixed(2)}</span>
+                    <button
+                        className={`${styles.btnLike} ${isLiked ? styles.liked : ''}`}
+                        onClick={handleLike}
                     >
-                        { isLiked ? '❤️' : '🤍' } { likes } Me gusta
-            </button>
+                        {isLiked ? '❤️' : '🤍'} {likes} Me gusta
+                    </button>
+                </div>
+                {onEdit || onDelete ? (
+                    <div className={styles.cardActions}>
+                        {onEdit ? (
+                            <button type="button" className={styles.btnEdit} onClick={onEdit}>
+                                Editar
+                            </button>
+                        ) : null}
+                        {onDelete ? (
+                            <button type="button" className={styles.btnDelete} onClick={onDelete}>
+                                Eliminar
+                            </button>
+                        ) : null}
+                    </div>
+                ) : null}
             </div>
-        </div>
-    </article>
-)
+        </article>
+    );
 }
  
 export default ProductCard;
+ 
