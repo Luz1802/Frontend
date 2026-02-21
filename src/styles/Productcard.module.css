@@ -1,7 +1,8 @@
 .productCard {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: var(--shadow-soft);
   overflow: hidden;
   transition:
     transform 0.3s ease,
@@ -10,54 +11,54 @@
   display: flex;
   flex-direction: column;
 }
-
+ 
 .productCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-strong);
 }
-
+ 
 .productImage {
   width: 100%;
-  height: 200px;
+  height: 210px;
   object-fit: cover;
 }
-
+ 
 .productInfo {
-  padding: 1.5rem;
+  padding: 1.4rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   flex: 1;
 }
-
+ 
 .productCategory {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #6366f1;
+  color: var(--primary-dark);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-
+ 
 .productName {
   font-size: 1.25rem;
   font-weight: 700;
   color: #1f2937;
   margin: 0;
 }
-
+ 
 .productDescription {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--gray-700);
   line-height: 1.5;
   flex: 1;
 }
-
+ 
 .productStock {
   font-size: 0.875rem;
   font-weight: 700;
   color: #374151;
 }
-
+ 
 .productFooter {
   display: flex;
   justify-content: space-between;
@@ -66,47 +67,47 @@
   padding-top: 1rem;
   border-top: 1px solid #e5e7eb;
 }
-
+ 
 .productPrice {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #059669;
+  color: var(--success);
 }
-
+ 
 .btnLike {
-  background: #f3f4f6;
+  background: rgba(15, 23, 42, 0.06);
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
-
+ 
 .btnLike:hover {
-  background: #e5e7eb;
+  background: rgba(6, 182, 212, 0.18);
 }
-
+ 
 .btnLike:active {
   transform: scale(0.95);
 }
-
+ 
 .btnLike.liked {
-  background: #fee2e2;
-  color: #dc2626;
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
 }
-
+ 
 .btnLike.liked:hover {
-  background: #fecaca;
+  background: rgba(239, 68, 68, 0.25);
 }
-
+ 
 .cardActions {
   display: flex;
   gap: 0.5rem;
   margin-top: 0.75rem;
 }
-
+ 
 .btnEdit,
 .btnDelete {
   border: none;
@@ -116,21 +117,32 @@
   font-weight: 800;
   cursor: pointer;
 }
-
+ 
 .btnEdit {
   background: var(--primary);
   color: white;
 }
-
+ 
 .btnEdit:hover {
   background: var(--primary-dark);
 }
-
+ 
 .btnDelete {
   background: var(--danger);
   color: white;
 }
-
+ 
 .btnDelete:hover {
   filter: brightness(0.95);
 }
+ 
+@media (max-width: 640px) {
+  .productImage {
+    height: 180px;
+  }
+ 
+  .productInfo {
+    padding: 1.1rem;
+  }
+}
+ 

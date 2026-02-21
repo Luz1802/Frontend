@@ -1,4 +1,7 @@
 .header {
   width: 100%;
+  padding: 1.5rem 0 0.5rem;
+  display: flex;
+  flex-direction: columna;
+  gap: 1rem;
 }
-

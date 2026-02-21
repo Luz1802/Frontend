@@ -33,7 +33,7 @@ export const products = [
     category: "Electronics",
     price: 300,
     stock: 5,
-    image: "https://images.pexels.com/photos/6373045/pexels-photo-6373045.jpeg",
+    image: "https://exitocol.vtexassets.com/arquivos/ids/24333085/tablet-lenovo-tab-m11-128gb4gb-con-lapiz-y-estuche-verde.jpg?v=638605463449830000",
     description: "A portable tablet for entertainment and productivity."
   },
 ]
