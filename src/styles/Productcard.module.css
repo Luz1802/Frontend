@@ -45,6 +45,12 @@
   color: #1f2937;
   margin: 0;
 }
+
+.productRating {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #f59e0b;
+}
  
 .productDescription {
   font-size: 0.875rem;
