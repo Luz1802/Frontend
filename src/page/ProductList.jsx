@@ -1,70 +1,70 @@
 import { useEffect, useState } from 'react';
- 
+
 import ProductCard from '../components/ProductCard';
 import ProductForm from '../components/ProductForm';
 import styles from '../styles/ProductList.module.css';
 import { loadProducts, PRODUCTS_STORAGE_KEY } from '../utils/productsStorage';
- 
+
 const STORAGE_KEY = PRODUCTS_STORAGE_KEY;
- 
+
 function ProductList() {
   const [productsState, setProductsState] = useState(loadProducts);
   const [editingProduct, setEditingProduct] = useState(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
- 
+
   useEffect(() => {
     if (typeof window === 'undefined') {
       return;
     }
- 
+
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(productsState));
     } catch (error) {
       void error;
     }
   }, [productsState]);
- 
+
   const handleOpenCreate = () => {
     setEditingProduct(null);
     setIsFormOpen(true);
   };
- 
+
   const handleCloseForm = () => {
     setEditingProduct(null);
     setIsFormOpen(false);
   };
- 
+
   const handleAddProduct = (product) => {
     setProductsState((prev) => {
       const maxId = prev.reduce((acc, item) => Math.max(acc, item.id), 0);
       const nextId = maxId + 1;
- 
+
       return [...prev, { ...product, id: nextId }];
     });
- 
+
     handleCloseForm();
   };
- 
+
   const handleDeleteProduct = (id) => {
     setProductsState((prev) => prev.filter((product) => product.id !== id));
- 
+
     if (editingProduct?.id === id) {
       handleCloseForm();
     }
   };
- 
+
   const handleEditStart = (product) => {
     setEditingProduct(product);
     setIsFormOpen(true);
   };
- 
+
   const handleEditSubmit = (updatedProduct) => {
     setProductsState((prev) =>
       prev.map((product) => (product.id === updatedProduct.id ? updatedProduct : product))
     );
     handleCloseForm();
   };
- 
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -73,7 +73,7 @@ function ProductList() {
           Encuentra los mejores productos de tecnología para tu setup
         </p>
       </header>
- 
+
       {isFormOpen ? (
         <ProductForm
           initialValues={editingProduct}
@@ -88,7 +88,7 @@ function ProductList() {
               Agregar producto
             </button>
           </div>
- 
+
           <div className={styles.grid}>
             {productsState.map((product) => (
               <ProductCard
@@ -100,9 +100,10 @@ function ProductList() {
                 stock={product.stock}
                 image={product.image}
                 description={product.description}
+                showDescription={false}
+                showLikeButton={false}
                 onDelete={() => handleDeleteProduct(product.id)}
                 onEdit={() => handleEditStart(product)}
-                onDetails={() => {}}
               />
             ))}
           </div>
@@ -111,5 +112,5 @@ function ProductList() {
     </div>
   );
 }
- 
+
 export default ProductList;
